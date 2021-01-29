@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace CockaIO.Views
 {
-    public class MainWindow : Window
+    public class MainWindowView : Window
     {
-        public MainWindow()
+        public MainWindowView()
         {
             InitializeComponent();
 #if DEBUG

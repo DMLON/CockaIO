@@ -17,9 +17,10 @@ namespace CockaIO
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow
+                var database = new CockaIO.Models.CockaioContext();
+                desktop.MainWindow = new MainWindowView
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new MainWindowViewModel(database),
                 };
             }
 
