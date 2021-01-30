@@ -6,22 +6,32 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Linq;
+using CockaIO.Services;
 
 namespace CockaIO.ViewModels
 {
     public class MainDashboardViewModel : ViewModelBase
     {
-        public ObservableCollection<Users> users { get; private set; }
-        public MainDashboardViewModel(CockaioContext? dbContext) : base(dbContext)
+        public class UserView
+        {
+            public string Name { get; set; }
+            public string Lastname { get; set; }
+        }
+        public UserDirectoryViewModel UserDirectoryViewModel;
+        public ObservableCollection<UserView> users { get; private set; }
+        public MainDashboardViewModel(IDbContextService? dbContext) : base(dbContext)
         {
             LoadUsers();
         }
 
         public void LoadUsers()
         {
-            var query = dbContext.Users.Select(x => x);
-            users = new ObservableCollection<Users>(query);
+            var query = dbContext.GetAllEntities<Users>().Select(x => new UserView{
+                Name=x.Name,
+                Lastname=x.Lastname 
+            });
+            users = new ObservableCollection<UserView>(query);
         }
-        string greetings => "Hello world!";
+       
     }
 }

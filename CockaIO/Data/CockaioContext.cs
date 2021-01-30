@@ -3,12 +3,17 @@ using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
+using CockaIO.Models;
+using System.Linq;
+using CockaIO.Services;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
 #nullable disable
 
-namespace CockaIO.Models
+namespace CockaIO.Data
 {
-    public partial class CockaioContext : DbContext
+    public partial class CockaioContext : DbContext,IDbContextService
     {
         public CockaioContext()
         {
@@ -17,11 +22,59 @@ namespace CockaIO.Models
         public CockaioContext(DbContextOptions<CockaioContext> options)
             : base(options)
         {
+
         }
 
         public virtual DbSet<Cars> Cars { get; set; }
         public virtual DbSet<UserCar> UserCar { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+
+        public bool CreateEntity<T>(T entity) where T : class
+        {
+            if (this.Add<T>(entity) != null)
+            {
+                //this.SaveChanges(); Should i put this here?
+                return true;
+            }
+            else return false;
+        }
+
+        public bool DeleteEntity<T>(T entity) where T: class
+        {
+            if (this.Remove<T>(entity) != null)
+            {
+                //this.SaveChanges(); Should i put this here?
+                return true;
+            }
+            else return false;
+        }
+
+        public IQueryable<T> GetAllEntities<T>() where T : class
+        {
+            return base.Set<T>();
+        }
+
+        T GetById<T>(int id) where T : class
+        {
+            return base.Find<T>(id);
+        }
+
+        public bool UpdateEntity<T>(T entity) where T : class
+        {
+            if (this.Update<T>(entity) != null)
+            {
+                //this.SaveChanges(); Should i put this here?
+                return true;
+            }
+            else return false;
+        }
+
+        public new void SaveChanges() => base.SaveChanges();
+
+        T IDbContextService.GetById<T>(int id)
+        {
+            return (T)this.Find(typeof(T), id);
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -141,5 +194,7 @@ namespace CockaIO.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+
     }
 }

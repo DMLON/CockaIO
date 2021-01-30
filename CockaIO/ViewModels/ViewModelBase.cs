@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using CockaIO.Models;
+using CockaIO.Services;
 using ReactiveUI;
 
 namespace CockaIO.ViewModels
 {
     public class ViewModelBase : ReactiveObject
     {
-        protected CockaioContext dbContext;
+        protected IDbContextService dbContext;
 
-        public ViewModelBase(CockaioContext? dbContext)
+        public ViewModelBase(IDbContextService? dbContext)
         {
             if (dbContext != null)
                 this.dbContext = dbContext;

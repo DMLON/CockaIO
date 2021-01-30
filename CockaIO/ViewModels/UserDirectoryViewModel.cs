@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using ReactiveUI;
@@ -8,7 +8,7 @@ using CockaIO.Services;
 
 namespace CockaIO.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class UserDirectoryViewModel : ViewModelBase
     {
         ViewModelBase content;
         public ViewModelBase Content
@@ -17,7 +17,7 @@ namespace CockaIO.ViewModels
             private set => this.RaiseAndSetIfChanged(ref content, value);
         }
 
-        public MainWindowViewModel(IDbContextService? dbContext) : base(dbContext)
+        public UserDirectoryViewModel(IDbContextService? dbContext) : base(dbContext)
         {
             content = new MainDashboardViewModel(dbContext);
         }

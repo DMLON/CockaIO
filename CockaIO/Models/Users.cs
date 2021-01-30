@@ -19,5 +19,6 @@ namespace CockaIO.Models
         public int Age { get; set; }
 
         public virtual ICollection<UserCar> UserCar { get; set; }
+
     }
 }

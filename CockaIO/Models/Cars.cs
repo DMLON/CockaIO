@@ -20,5 +20,6 @@ namespace CockaIO.Models
         public string UrlImage { get; set; }
 
         public virtual ICollection<UserCar> UserCar { get; set; }
+
     }
 }
