@@ -7,31 +7,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Linq;
 using CockaIO.Services;
+using ReactiveUI;
 
 namespace CockaIO.ViewModels
 {
     public class MainDashboardViewModel : ViewModelBase
     {
-        public class UserView
-        {
-            public string Name { get; set; }
-            public string Lastname { get; set; }
-        }
-        public UserDirectoryViewModel UserDirectoryViewModel;
-        public ObservableCollection<UserView> users { get; private set; }
+        ViewModelBase content;
+        public UserDirectoryViewModel UserDirectoryViewModel { get; set; }
+        
         public MainDashboardViewModel(IDbContextService? dbContext) : base(dbContext)
         {
-            LoadUsers();
+            Content = UserDirectoryViewModel = new UserDirectoryViewModel(dbContext);
         }
 
-        public void LoadUsers()
+        public ViewModelBase Content
         {
-            var query = dbContext.GetAllEntities<Users>().Select(x => new UserView{
-                Name=x.Name,
-                Lastname=x.Lastname 
-            });
-            users = new ObservableCollection<UserView>(query);
+            get => content;
+            private set => this.RaiseAndSetIfChanged(ref content, value);
         }
-       
+
     }
 }

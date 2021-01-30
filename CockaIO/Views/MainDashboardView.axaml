@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:CockaIO.Views;assembly=CockaIO"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CockaIO.Views.MainDashboardView">
 
@@ -18,12 +19,11 @@
     <Border Grid.Column="2"/>
 
     <Panel Grid.Column="0">
-      <DataGrid Items="{Binding users}" AlternatingRowBackground="DarkBlue" IsReadOnly="True">
-        <DataGrid.Columns>
-          <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-          <DataGridTextColumn Header="Last Name" Binding="{Binding Lastname}"/>
-        </DataGrid.Columns>
-      </DataGrid>
+      <views:UserDirectoryView DataContext="{Binding UserDirectoryViewModel}"/>
+    </Panel>
+
+    <Panel Grid.Column="2">
+      <TextBlock Text="{Binding banana}" Foreground="White"/>
     </Panel>
   </Grid>
 

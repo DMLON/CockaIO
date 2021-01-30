@@ -3,6 +3,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CockaIO.Views.UserDirectoryView">
-  Welcome to Avalonia!
+             x:Class="CockaIO.Views.UserDirectoryView"
+             >
+
+  <StackPanel>
+    <DataGrid Items="{Binding Users}" AlternatingRowBackground="DarkBlue" IsReadOnly="True" SelectedItem="{Binding SelectedUser}">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+        <DataGridTextColumn Header="Last Name" Binding="{Binding Lastname}"/>
+      </DataGrid.Columns>
+    </DataGrid>
+  </StackPanel>
+
 </UserControl>
