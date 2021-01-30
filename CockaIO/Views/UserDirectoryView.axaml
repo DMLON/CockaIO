@@ -7,7 +7,7 @@
              >
 
   <StackPanel>
-    <DataGrid Items="{Binding Users}" AlternatingRowBackground="DarkBlue" IsReadOnly="True" SelectedItem="{Binding SelectedUser}">
+    <DataGrid Items="{Binding Users}" AlternatingRowBackground="DarkBlue" IsReadOnly="True" SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
       <DataGrid.Columns>
         <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
         <DataGridTextColumn Header="Last Name" Binding="{Binding Lastname}"/>

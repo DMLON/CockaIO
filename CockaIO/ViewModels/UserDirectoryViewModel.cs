@@ -9,6 +9,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Diagnostics;
+using Avalonia.Interactivity;
 
 namespace CockaIO.ViewModels
 {
@@ -21,7 +22,7 @@ namespace CockaIO.ViewModels
         }
 
         public ObservableCollection<Users> Users { get; private set; }
-        //public ReactiveCommand<Unit, Unit> SelectedUserChangedCommand;
+        
 
         private Users selectedUser;
         public Users SelectedUser{
@@ -31,9 +32,8 @@ namespace CockaIO.ViewModels
         public UserDirectoryViewModel(IDbContextService? dbContext) : base(dbContext)
         {
             LoadUsers();
-            this.WhenAnyValue(x => x.SelectedUser).Subscribe(x=>SelectedUserChanged());
-
-            //SelectedUserChangedCommand = ReactiveCommand.Create(SelectedUserChanged);
+            SelectedUserChangedCommand = ReactiveCommand.Create<Users>(SelectedUserChanged);
+            var SelectedUserChanged_ = this.WhenAnyValue(x=>x.SelectedUser).InvokeCommand(SelectedUserChangedCommand);
         }
 
         public void LoadUsers()
@@ -42,9 +42,11 @@ namespace CockaIO.ViewModels
             Users = new ObservableCollection<Users>(query);
         }
 
-        public void SelectedUserChanged()
+        public ReactiveCommand<Users, Unit> SelectedUserChangedCommand { get; private set; }
+        public void SelectedUserChanged(Users NewUser)
         {
-            string a = "a" + "b";
+            //Change user in the other view
+            
         }
 
     }
