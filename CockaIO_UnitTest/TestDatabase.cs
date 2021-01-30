@@ -63,14 +63,13 @@ namespace CockaIO_UnitTest
 
             if (property != null)
             {
-                return (IQueryable<T>)property;
+                return ((List<T>)property).AsQueryable();
             }
             throw new ArgumentException($"Entity type {typeof(T)} not supported");
         }
 
         public T GetById<T>(int id) where T : class
         {
-            Console.WriteLine(this.GetType().ToString());
             var property = this.GetType().GetProperty(typeof(T).Name).GetValue(this);
 
             if (property != null)
@@ -115,12 +114,13 @@ namespace CockaIO_UnitTest
 
         public bool UpdateEntity<T>(T entity) where T : class
         {
-            Console.WriteLine(this.GetType().ToString());
+            //Get list corresponding on the type of T
             var property = this.GetType().GetProperty(typeof(T).Name).GetValue(this);
 
             if (property != null)
             {
                 List<T> referenceToList = (List<T>)property;
+                //Get all propierties of the type of the generic data
                 var properties = typeof(T).GetProperties();
                 int IdIndex = 0;
                 for (int j = 0; j < properties.Length; ++j)
