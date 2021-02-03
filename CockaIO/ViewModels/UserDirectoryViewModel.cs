@@ -29,11 +29,13 @@ namespace CockaIO.ViewModels
             get => selectedUser;
             private set => this.RaiseAndSetIfChanged(ref selectedUser, value);
         }
-        public UserDirectoryViewModel(IDbContextService? dbContext) : base(dbContext)
+        public UserDirectoryViewModel(IDbContextService dbContext) : base(dbContext)
         {
             LoadUsers();
-            SelectedUserChangedCommand = ReactiveCommand.Create<Users>(SelectedUserChanged);
+            //Get the user and use it as a command, will be observed by the main view
+            SelectedUserChangedCommand = ReactiveCommand.Create<Users,Users>(x=>x);
             var SelectedUserChanged_ = this.WhenAnyValue(x=>x.SelectedUser).InvokeCommand(SelectedUserChangedCommand);
+            
         }
 
         public void LoadUsers()
@@ -42,12 +44,13 @@ namespace CockaIO.ViewModels
             Users = new ObservableCollection<Users>(query);
         }
 
-        public ReactiveCommand<Users, Unit> SelectedUserChangedCommand { get; private set; }
-        public void SelectedUserChanged(Users NewUser)
-        {
-            //Change user in the other view
-            
-        }
+        public ReactiveCommand<Users, Users> SelectedUserChangedCommand { get; private set; }
+        //public Users SelectedUserChanged(Users newUser)
+        //{
+        //    //Change user in the other view
+        //    //TODO: Make contact with other view!, show details
+        //    return SelectedUser;
+        //}
 
     }
 }

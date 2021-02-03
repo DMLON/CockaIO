@@ -17,7 +17,7 @@ namespace CockaIO.ViewModels
             private set => this.RaiseAndSetIfChanged(ref content, value);
         }
 
-        public MainWindowViewModel(IDbContextService? dbContext) : base(dbContext)
+        public MainWindowViewModel(IDbContextService dbContext) : base(dbContext)
         {
             content = new MainDashboardViewModel(dbContext);
         }

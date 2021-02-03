@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using CockaIO.ViewModels;
 using CockaIO.Views;
 using CockaIO.Data;
+using System;
 
 namespace CockaIO
 {
@@ -20,6 +21,9 @@ namespace CockaIO
             {
                 var database = new CockaioContext();
                 //var database = new TestDatabase();
+                if (database == null)
+                    throw new Exception("Error getting database context!");
+
                 desktop.MainWindow = new MainWindowView
                 {
                     DataContext = new MainWindowViewModel(database),

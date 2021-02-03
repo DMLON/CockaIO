@@ -11,12 +11,9 @@ namespace CockaIO.ViewModels
     {
         protected IDbContextService dbContext;
 
-        public ViewModelBase(IDbContextService? dbContext)
+        public ViewModelBase(IDbContextService dbContext)
         {
-            if (dbContext != null)
-                this.dbContext = dbContext;
-            else
-                throw new Exception("Error getting database context!");
+            this.dbContext = dbContext;
             //TODO: Custon exception?
         }
     }
