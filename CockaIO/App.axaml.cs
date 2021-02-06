@@ -5,6 +5,8 @@ using CockaIO.ViewModels;
 using CockaIO.Views;
 using CockaIO.Data;
 using System;
+using Avalonia.Controls;
+using CockaIO.Services;
 
 namespace CockaIO
 {
@@ -19,7 +21,13 @@ namespace CockaIO
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var database = new CockaioContext();
+
+                IDbContextService database;
+                if (Design.IsDesignMode)
+                    database = new TestDatabase();
+                else
+                    database = new CockaioContext();
+
                 //var database = new TestDatabase();
                 if (database == null)
                     throw new Exception("Error getting database context!");

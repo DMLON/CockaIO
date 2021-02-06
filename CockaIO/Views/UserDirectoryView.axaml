@@ -2,17 +2,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="180" d:DesignHeight="450"
              x:Class="CockaIO.Views.UserDirectoryView"
+             xmlns:vm="clr-namespace:CockaIO.ViewModels;assembly=CockaIO"
              >
-
-  <StackPanel>
-    <DataGrid Items="{Binding Users}" AlternatingRowBackground="DarkBlue" IsReadOnly="True" SelectedItem="{Binding SelectedUser, Mode=TwoWay}">
+  
+  <Design.DataContext>
+    <vm:dUserDirectoryViewModel/>
+  </Design.DataContext>
+  
+    <DataGrid Items="{Binding Users}" 
+              AlternatingRowBackground="DarkBlue" 
+              IsReadOnly="True" 
+              SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
+              >
       <DataGrid.Columns>
         <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
         <DataGridTextColumn Header="Last Name" Binding="{Binding Lastname}"/>
       </DataGrid.Columns>
     </DataGrid>
-  </StackPanel>
 
 </UserControl>

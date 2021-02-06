@@ -12,7 +12,10 @@ namespace CockaIO.ViewModels
     {
         public UserInfoViewModel(IDbContextService dbContext) : base(dbContext)
         {
-            
+            //Show all user data
+            //Edit button
+
+            //Service that gets cars of the user
         }
 
     }

@@ -5,12 +5,12 @@
              xmlns:views="clr-namespace:CockaIO.Views;assembly=CockaIO"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CockaIO.Views.MainDashboardView">
-
+  
   <Grid Name="MasterGrid">
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="40" MinWidth="180"/>
+      <ColumnDefinition Width="180" MinWidth="180"/>
       <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="75" MinWidth="300"/>
+      <ColumnDefinition Width="300" MinWidth="300"/>
     </Grid.ColumnDefinitions>
 
     <Border Grid.Column="0"/>

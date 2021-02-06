@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using CockaIO.Services;
 using CockaIO.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Reflection;
 
-namespace CockaIO_UnitTest
+namespace CockaIO.Data
 {
-    [TestClass]
     public class TestDatabase : IDbContextService
     {
 
@@ -22,8 +20,8 @@ namespace CockaIO_UnitTest
             for (int i = 0; i < 5; ++i)
             {
                 Cars.Add(new Cars { Idcar = i, Brand = $"TestBrand{i + 1}", Model = $"TestModel{i + 1}", UrlImage = $"URL{i + 1}", Year = 2000 + i });
-                Users.Add(new Users {Iduser = i, Name = $"Name{i}",Lastname=$"Lastname{i}",Age=i+15 });
-                UserCar.Add(new UserCar { Idcar = i,Iduser=i, CarColor="Red",Plate=$"AAA {i}{i}{i}"});
+                Users.Add(new Users { Iduser = i, Name = $"Name{i}", Lastname = $"Lastname{i}", Age = i + 15 });
+                UserCar.Add(new UserCar { Idcar = i, Iduser = i, CarColor = "Red", Plate = $"AAA {i}{i}{i}" });
             }
 
         }
@@ -35,7 +33,7 @@ namespace CockaIO_UnitTest
         public bool CreateEntity<T>(T entity) where T : class
         {
             var property = this.GetType().GetProperty(typeof(T).Name).GetValue(this, null);
-            
+
             if (property != null)
             {
                 List<T> referenceToList = (List<T>)property;
@@ -128,7 +126,7 @@ namespace CockaIO_UnitTest
                     //Look for property that starts with Id
                     if (properties[j].Name.StartsWith("Id"))
                     {
-                        IdIndex = j; 
+                        IdIndex = j;
                         break;
                     }
                 }

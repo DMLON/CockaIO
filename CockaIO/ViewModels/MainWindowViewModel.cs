@@ -5,21 +5,20 @@ using ReactiveUI;
 using CockaIO.Models;
 using System.Data.SqlTypes;
 using CockaIO.Services;
+using ReactiveUI.Fody.Helpers;
 
 namespace CockaIO.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        ViewModelBase content;
-        public ViewModelBase Content
-        {
-            get => content;
-            private set => this.RaiseAndSetIfChanged(ref content, value);
-        }
+        //ViewModelBase content;
+
+        [Reactive]
+        public ViewModelBase Content { get; private set; }
 
         public MainWindowViewModel(IDbContextService dbContext) : base(dbContext)
         {
-            content = new MainDashboardViewModel(dbContext);
+            Content = new MainDashboardViewModel(dbContext);
         }
 
     }
